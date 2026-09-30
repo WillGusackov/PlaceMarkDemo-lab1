@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
 
         val root = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
-            setPadding(32, 32, 32, 32)
+            setPadding(32, 35, 32, 32)
         }
 
         val title = TextView(this).apply {
@@ -46,7 +46,10 @@ class MainActivity : AppCompatActivity() {
         val addButton = Button(this).apply {
             text = "Add Mark"
             setOnClickListener {
-                val intent = Intent(this@MainActivity, AddEditActivity::class.java)
+                val intent = Intent(
+                    this@MainActivity,
+                    AddEditActivity::class.java
+                )
                 startActivity(intent)
             }
         }
