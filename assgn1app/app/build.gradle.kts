@@ -1,7 +1,8 @@
+
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.secrets.gradle.plugin)
 }
-
 android {
     namespace = "com.example.assgn1_app"
     compileSdk {
@@ -11,7 +12,7 @@ android {
     defaultConfig {
         applicationId = "com.example.assgn1_app"
         minSdk = 24
-        targetSdk = 37
+        targetSdk = 34
         versionCode = 2
         versionName = "2.0"
 
@@ -24,6 +25,7 @@ android {
                 enable = false
             }
         }
+
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -45,5 +47,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.junit)
+    implementation(libs.google.maps)
+    implementation(libs.google.place)
 
 }
