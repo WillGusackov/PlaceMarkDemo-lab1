@@ -14,6 +14,8 @@ navigationUiKtx = "2.6.0"
 secretsGradlePlugin = "2.0.1"
 googlePlace = "3.4.0"
 googleMaps = "3.1.1"
+recyclerview = "1.3.0"
+core = "1.7.0"
 
 [libraries]
 androidx-appcompat-vversion = { module = "androidx.appcompat:appcompat", version.ref = "appcompatVersion" }
@@ -29,6 +31,8 @@ androidx-navigation-fragment-ktx = { group = "androidx.navigation", name = "navi
 androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigationUiKtx" }
 google-place = { group = "com.google.android.libraries.places", name = "places", version.ref = "googlePlace" }
 google-maps = { group = "com.google.maps.android", name = "places-ktx", version.ref = "googleMaps" }
+androidx-recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
+androidx-core = { group = "androidx.test", name = "core", version.ref = "core" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
