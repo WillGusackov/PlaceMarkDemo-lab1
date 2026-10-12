@@ -17,7 +17,7 @@
             android:id="@+id/marksTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Placed Marks"
+            android:text="Tech Events"
             android:textSize="28sp"
             android:textStyle="bold"
             android:padding="16dp" />

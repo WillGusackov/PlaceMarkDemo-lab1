@@ -7,14 +7,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.assgn1_app.R
-import com.example.assgn1_app.placemark.AppData
-import com.example.assgn1_app.placemark.PlacedMark
-import com.example.assgn1_app.placemark.PlacedMarkAdapter
+import com.example.assgn1_app.eventsPack.EventAdapter
+import com.example.assgn1_app.eventsPack.EventData
+import com.example.assgn1_app.eventsPack.EventItem
+
 
 class MarkListActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: PlacedMarkAdapter
+    private lateinit var adapter: EventAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,15 +25,15 @@ class MarkListActivity : AppCompatActivity() {
         recyclerView =
             findViewById(R.id.marksRecyclerView)
 
-        adapter = PlacedMarkAdapter(
-            marks = AppData.placeMarks.findAll(),
+        adapter = EventAdapter(
+            events = EventData.eventsStore.findAll(),
 
-            onEdit = { mark ->
-                editMark(mark)
+            onEdit = { event ->
+                editMark(event)
             },
 
-            onDelete = { mark ->
-                deleteMark(mark)
+            onDelete = { event ->
+                deleteMark(event)
             }
         )
 
@@ -57,13 +58,13 @@ class MarkListActivity : AppCompatActivity() {
 
         if (::adapter.isInitialized) {
 
-            adapter.updateMarks(
-                AppData.placeMarks.findAll()
+            adapter.updateEvents(
+                EventData.eventsStore.findAll()
             )
         }
     }
 
-    private fun editMark(mark: PlacedMark) {
+    private fun editMark(mark: EventItem) {
 
         val intent =
             Intent(this, AddEditActivity::class.java)
@@ -73,12 +74,12 @@ class MarkListActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun deleteMark(mark: PlacedMark) {
+    private fun deleteMark(mark: EventItem) {
 
-        AppData.placeMarks.delete(mark.id)
+        EventData.eventsStore.delete(mark.id)
 
-        adapter.updateMarks(
-            AppData.placeMarks.findAll()
+        adapter.updateEvents(
+            EventData.eventsStore.findAll()
         )
     }
 }

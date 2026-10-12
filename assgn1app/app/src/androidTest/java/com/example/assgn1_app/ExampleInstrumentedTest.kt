@@ -9,6 +9,8 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.example.assgn1_app.eventsPack.EventMemStore
+import com.example.assgn1_app.eventsPack.EventParser
 import com.example.assgn1_app.main.AddEditActivity
 import com.example.assgn1_app.placemark.PlacedMark
 
@@ -26,7 +28,6 @@ import org.junit.Assert.*
 class ExampleInstrumentedTest {
     @Test
     fun useAppContext() {
-        // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
         assertEquals("com.example.assgn1_app", appContext.packageName)
     }
@@ -37,13 +38,13 @@ class ExampleInstrumentedTest {
     }
 
     @Test
-    fun testMark() {
-        val mark = PlacedMark(
-            title = "Test Title",
-            desc = "Test Description",
-            x = 1.0,
-            y = 2.0
-        )
+    fun testEventParserLoadsXml() {
+        val context = InstrumentationRegistry.getInstrumentation().targetContext
+        val store = EventMemStore()
+        EventParser.loadEventsFromXml(context, store)
+
+        val events = store.findAll()
+        assertTrue("Events should be successfully loaded from XML assets", events.isNotEmpty())
     }
 
     @Test

@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            android:text="Add Mark"
+            android:text="Add Event"
             android:textSize="28sp"
             android:textStyle="bold" />
 
@@ -39,20 +39,28 @@
             android:minLines="3" />
 
         <EditText
-            android:id="@+id/xInput"
+            android:id="@+id/linkInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:hint="X coordinate"
-            android:inputType="numberDecimal|numberSigned" />
+            android:hint="Link"
+            android:inputType="textUri" />
 
         <EditText
-            android:id="@+id/yInput"
+            android:id="@+id/pubDateInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:hint="Publication Date"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/categoryInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            android:hint="Y coordinate"
-            android:inputType="numberDecimal|numberSigned" />
+            android:hint="Category"
+            android:inputType="text" />
 
         <Button
             android:id="@+id/saveButton"
