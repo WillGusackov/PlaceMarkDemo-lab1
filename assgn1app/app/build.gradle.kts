@@ -8,6 +8,11 @@ android {
     compileSdk {
         version = release(37)
     }
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
+        }
+    }
 
     defaultConfig {
         applicationId = "com.example.assgn1_app"
@@ -17,6 +22,7 @@ android {
         versionName = "2.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders["PLACES_API_KEY"] = "DEFAULT_API_KEY"
     }
 
     buildTypes {
@@ -43,11 +49,15 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.androidx.recyclerview)
     implementation(libs.material)
+    testImplementation(libs.androidx.core)
+    testImplementation(libs.androidx.espresso.core)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.junit)
     implementation(libs.google.maps)
     implementation(libs.google.place)
+    testImplementation("org.robolectric:robolectric:4.14.1")
 
 }

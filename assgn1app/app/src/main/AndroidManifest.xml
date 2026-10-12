@@ -18,15 +18,25 @@
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity
             android:name=".main.AddEditActivity"
             android:exported="false" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="${PLACES_API_KEY}" />
+
+        <activity
+            android:name=".main.MarkListActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+
     </application>
 
 </manifest>
