@@ -26,6 +26,9 @@ class MainActivity : AppCompatActivity() {
         val addMarkButton =
             findViewById<Button>(R.id.addMarkButton)
 
+        val viewEventsButton =
+            findViewById<Button>(R.id.viewEventsButton)
+
         viewMarksButton.setOnClickListener {
             startActivity(
                 Intent(this, MarkListActivity::class.java)
@@ -35,6 +38,12 @@ class MainActivity : AppCompatActivity() {
         addMarkButton.setOnClickListener {
             startActivity(
                 Intent(this, AddEditActivity::class.java)
+            )
+        }
+
+        viewEventsButton.setOnClickListener {
+            startActivity(
+                Intent(this, EventListActivity::class.java)
             )
         }
 

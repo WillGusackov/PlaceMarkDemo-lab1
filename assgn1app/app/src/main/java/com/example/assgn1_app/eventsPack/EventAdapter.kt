@@ -10,7 +10,7 @@ import com.example.assgn1_app.R
 
 class EventAdapter(
     private var events: List<EventItem>,
-    private val onItemClick: (EventItem) -> Unit,
+    private val onEdit: (EventItem) -> Unit,
     private val onDelete: (EventItem) -> Unit
 ) : RecyclerView.Adapter<EventAdapter.EventViewHolder>() {
 
@@ -35,7 +35,7 @@ class EventAdapter(
         holder.coordinatesText.text = event.pubDate
 
         holder.editButton.setOnClickListener {
-            onItemClick(event)
+            onEdit(event)
         }
 
         holder.deleteButton.setOnClickListener {
