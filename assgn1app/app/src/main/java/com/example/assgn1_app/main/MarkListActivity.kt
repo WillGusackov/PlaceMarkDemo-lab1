@@ -10,6 +10,7 @@ import com.example.assgn1_app.R
 import com.example.assgn1_app.eventsPack.EventAdapter
 import com.example.assgn1_app.eventsPack.EventData
 import com.example.assgn1_app.eventsPack.EventItem
+import com.example.assgn1_app.eventsPack.EventParser
 
 
 class MarkListActivity : AppCompatActivity() {
@@ -21,6 +22,11 @@ class MarkListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_mark_list)
+
+        // Load XML data if empty
+        if (EventData.eventsStore.findAll().isEmpty()) {
+            EventParser.loadEventsFromXml(this, EventData.eventsStore)
+        }
 
         recyclerView =
             findViewById(R.id.marksRecyclerView)
@@ -65,19 +71,13 @@ class MarkListActivity : AppCompatActivity() {
     }
 
     private fun editMark(mark: EventItem) {
-
-        val intent =
-            Intent(this, AddEditActivity::class.java)
-
+        val intent = Intent(this, AddEditActivity::class.java)
         intent.putExtra("id", mark.id)
-
         startActivity(intent)
     }
 
     private fun deleteMark(mark: EventItem) {
-
         EventData.eventsStore.delete(mark.id)
-
         adapter.updateEvents(
             EventData.eventsStore.findAll()
         )
