@@ -3,6 +3,7 @@ package com.example.assgn1_app.main
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -47,6 +48,24 @@ class MarkListActivity : AppCompatActivity() {
             LinearLayoutManager(this)
 
         recyclerView.adapter = adapter
+//search by title here for extra marks :>
+        val searchBar = findViewById<SearchView>(R.id.searchBar)
+        searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean = false
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                val query = newText.orEmpty().lowercase()
+                val filtered = if (query.isEmpty()) {
+                    EventData.eventsStore.findAll()
+                } else {
+                    EventData.eventsStore.findAll().filter { event ->
+                        event.title.lowercase().contains(query)
+                    }
+                }
+                adapter.updateEvents(filtered)
+                return true
+            }
+        })
 
         val returnButton =
             findViewById<Button>(R.id.returnButton)

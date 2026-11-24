@@ -22,6 +22,11 @@
             android:textStyle="bold"
             android:padding="16dp" />
 
+        <SearchView
+            android:id="@+id/searchBar"
+            android:layout_width="match_parent"
+            android:layout_height="48dp" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/marksRecyclerView"
             android:layout_width="match_parent"
