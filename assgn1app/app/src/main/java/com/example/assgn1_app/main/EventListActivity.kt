@@ -1,5 +1,6 @@
 package com.example.assgn1_app.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
@@ -29,7 +30,9 @@ class EventListActivity : AppCompatActivity() {
         adapter = EventAdapter(
             events = EventData.eventsStore.findAll(),
             onEdit = { event ->
-                // Handle edit click
+                val intent = Intent(this, AddEditActivity::class.java)
+                intent.putExtra("id", event.id)
+                startActivity(intent)
             },
             onDelete = { event ->
                 EventData.eventsStore.delete(event.id)
