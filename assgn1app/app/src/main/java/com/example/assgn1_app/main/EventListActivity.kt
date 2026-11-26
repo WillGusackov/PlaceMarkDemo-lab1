@@ -38,8 +38,8 @@ class EventListActivity : AppCompatActivity() {
             events = EventData.eventsStore.findAll(),
             listener = object : OnEventListener {
                 override fun onEventClick(event: EventItem) {
-                    Timber.d("Editing event id=${event.id}, title=${event.title}")
-                    val intent = Intent(this@EventListActivity, AddEditActivity::class.java)
+                    Timber.d("Opening event details for id=${event.id}, title=${event.title}")
+                    val intent = Intent(this@EventListActivity, EventDetailActivity::class.java)
                     intent.putExtra("id", event.id)
                     startActivity(intent)
                 }
