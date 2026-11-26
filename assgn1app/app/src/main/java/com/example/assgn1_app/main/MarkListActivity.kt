@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.SearchView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -12,7 +13,8 @@ import com.example.assgn1_app.eventsPack.EventAdapter
 import com.example.assgn1_app.eventsPack.EventData
 import com.example.assgn1_app.eventsPack.EventItem
 import com.example.assgn1_app.eventsPack.EventParser
-
+import com.example.assgn1_app.eventsPack.OnEventListener
+import timber.log.Timber
 
 class MarkListActivity : AppCompatActivity() {
 
@@ -21,34 +23,38 @@ class MarkListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_mark_list)
+
+        Timber.d("MarkListActivity created")
 
         // Load XML data if empty
         if (EventData.eventsStore.findAll().isEmpty()) {
             EventParser.loadEventsFromXml(this, EventData.eventsStore)
+            Timber.d("Loaded events from XML")
         }
 
-        recyclerView =
-            findViewById(R.id.marksRecyclerView)
+        recyclerView = findViewById(R.id.marksRecyclerView)
 
         adapter = EventAdapter(
             events = EventData.eventsStore.findAll(),
+            listener = object : OnEventListener {
+                override fun onEventClick(event: EventItem) {
+                    Timber.d("Editing event id=${event.id}, title=${event.title}")
+                    editMark(event)
+                }
 
-            onEdit = { event ->
-                editMark(event)
-            },
-
-            onDelete = { event ->
-                deleteMark(event)
+                override fun onEventLongClick(event: EventItem): Boolean {
+                    Timber.d("Long pressed event id=${event.id}, title=${event.title}")
+                    showDeleteConfirmationDialog(event)
+                    return true
+                }
             }
         )
 
-        recyclerView.layoutManager =
-            LinearLayoutManager(this)
-
+        recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
-//search by title here for extra marks :>
+
+        // Search by title
         val searchBar = findViewById<SearchView>(R.id.searchBar)
         searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean = false
@@ -62,30 +68,24 @@ class MarkListActivity : AppCompatActivity() {
                         event.title.lowercase().contains(query)
                     }
                 }
+                Timber.d("Search query: '$query', results: ${filtered.size}")
                 adapter.updateEvents(filtered)
                 return true
             }
         })
 
-        val returnButton =
-            findViewById<Button>(R.id.returnButton)
-
+        val returnButton = findViewById<Button>(R.id.returnButton)
         returnButton.setOnClickListener {
-
-            startActivity(
-                Intent(this, MainActivity::class.java)
-            )
+            Timber.d("Returning to MainActivity")
+            startActivity(Intent(this, MainActivity::class.java))
         }
     }
 
     override fun onResume() {
         super.onResume()
-
         if (::adapter.isInitialized) {
-
-            adapter.updateEvents(
-                EventData.eventsStore.findAll()
-            )
+            Timber.d("MarkListActivity resumed - refreshing events list")
+            adapter.updateEvents(EventData.eventsStore.findAll())
         }
     }
 
@@ -95,10 +95,23 @@ class MarkListActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    private fun showDeleteConfirmationDialog(mark: EventItem) {
+        AlertDialog.Builder(this)
+            .setTitle("Delete Mark")
+            .setMessage("Are you sure you want to delete '${mark.title}'?")
+            .setPositiveButton("Delete") { _, _ ->
+                Timber.d("Confirmed deletion of mark id=${mark.id}")
+                deleteMark(mark)
+            }
+            .setNegativeButton("Cancel") { dialog, _ ->
+                Timber.d("Cancelled deletion of mark id=${mark.id}")
+                dialog.dismiss()
+            }
+            .show()
+    }
+
     private fun deleteMark(mark: EventItem) {
         EventData.eventsStore.delete(mark.id)
-        adapter.updateEvents(
-            EventData.eventsStore.findAll()
-        )
+        adapter.updateEvents(EventData.eventsStore.findAll())
     }
 }

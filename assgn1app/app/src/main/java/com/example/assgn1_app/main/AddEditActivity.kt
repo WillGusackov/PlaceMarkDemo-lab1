@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.assgn1_app.R
 import com.example.assgn1_app.eventsPack.EventData
 import com.example.assgn1_app.eventsPack.EventItem
+import timber.log.Timber
 
 class AddEditActivity : AppCompatActivity() {
 
@@ -23,6 +24,8 @@ class AddEditActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.add_edit_activity)
 
+        Timber.d("AddEditActivity created")
+
         titleInput = findViewById(R.id.titleInput)
         descriptionInput = findViewById(R.id.descriptionInput)
         linkInput = findViewById(R.id.linkInput)
@@ -34,12 +37,14 @@ class AddEditActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.cancelButton).setOnClickListener {
+            Timber.d("Cancelled AddEditActivity")
             finish()
         }
 
         editingId = intent.getLongExtra("id", -1L)
 
         if (editingId != -1L) {
+            Timber.d("Loading existing event with id=$editingId")
             loadExistingEvent(editingId!!)
         }
     }
@@ -48,6 +53,7 @@ class AddEditActivity : AppCompatActivity() {
         val event = EventData.eventsStore.findOne(id)
 
         if (event == null) {
+            Timber.w("Event with id=$id not found")
             Toast.makeText(this, "Event not found", Toast.LENGTH_SHORT).show()
             finish()
             return
@@ -69,6 +75,7 @@ class AddEditActivity : AppCompatActivity() {
 
         if (title.isEmpty()) {
             titleInput.error = "Title is required"
+            Timber.w("Save attempted with empty title")
             return
         }
 
@@ -81,6 +88,7 @@ class AddEditActivity : AppCompatActivity() {
                 category = category
             )
             EventData.eventsStore.create(event)
+            Timber.d("Created new event id=${event.id}, title=$title")
             Toast.makeText(this, "Event created", Toast.LENGTH_SHORT).show()
         } else {
             val event = EventItem(
@@ -92,6 +100,7 @@ class AddEditActivity : AppCompatActivity() {
                 category = category
             )
             EventData.eventsStore.update(event)
+            Timber.d("Updated event id=${event.id}, title=$title")
             Toast.makeText(this, "Event updated", Toast.LENGTH_SHORT).show()
         }
 
