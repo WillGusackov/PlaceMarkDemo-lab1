@@ -59,5 +59,7 @@ dependencies {
     implementation(libs.google.maps)
     implementation(libs.google.place)
     testImplementation("org.robolectric:robolectric:4.14.1")
+    implementation("com.jakewharton.timber:timber:5.0.1")
+
 
 }
