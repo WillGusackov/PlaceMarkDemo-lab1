@@ -70,7 +70,7 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     implementation(libs.google.maps)
     implementation(libs.google.place)
-    implementation("org.osmdroid:osmdroid-android:6.1.20")
+    implementation("com.google.android.gms:play-services-maps:18.2.0")
     testImplementation("org.robolectric:robolectric:4.14.1")
     implementation("com.jakewharton.timber:timber:5.0.1")
 

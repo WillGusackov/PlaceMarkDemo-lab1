@@ -7,104 +7,78 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.example.assgn1_app.R
 import com.example.assgn1_app.eventsPack.EventData
-import org.osmdroid.config.Configuration
-import org.osmdroid.events.MapEventsReceiver
-import org.osmdroid.tileprovider.tilesource.TileSourceFactory
-import org.osmdroid.util.GeoPoint
-import org.osmdroid.views.MapView
-import org.osmdroid.views.overlay.MapEventsOverlay
-import org.osmdroid.views.overlay.Marker
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
+import com.google.android.gms.maps.model.MarkerOptions
+import timber.log.Timber
 
-class MapsActivity : AppCompatActivity() {
-    private lateinit var map: MapView
-    private var selectedPoint: GeoPoint? = null
-    private var marker: Marker? = null
+class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
+
+    private lateinit var mMap: GoogleMap
+    private var selectedMarker: Marker? = null
+    private var selectedLatLng: LatLng = LatLng(53.3498, -6.2603)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        Configuration.getInstance().userAgentValue = packageName
         setContentView(R.layout.show_map)
-
-        map = findViewById(R.id.map)
-        map.setTileSource(TileSourceFactory.MAPNIK)
-        map.setMultiTouchControls(true)
 
         val lat = intent.getDoubleExtra("latitude", 53.3498)
         val lon = intent.getDoubleExtra("longitude", -6.2603)
-        val start = GeoPoint(lat, lon)
+        selectedLatLng = LatLng(lat, lon)
 
-        map.controller.setZoom(18.0)
-        map.controller.setCenter(start)
-        setSelectedPoint(start)
-        showExistingMarkers()
-
-        val receiver = object : MapEventsReceiver {
-            override fun singleTapConfirmedHelper(point: GeoPoint): Boolean {
-                setSelectedPoint(point)
-                return true
-            }
-
-            override fun longPressHelper(point: GeoPoint): Boolean {
-                setSelectedPoint(point)
-                return true
-            }
-        }
-        map.overlays.add(MapEventsOverlay(receiver))
+        val mapFragment = supportFragmentManager
+            .findFragmentById(R.id.map) as SupportMapFragment
+        mapFragment.getMapAsync(this)
 
         findViewById<Button>(R.id.confirmLocationButton).setOnClickListener {
-            val point = selectedPoint ?: return@setOnClickListener
             val resultIntent = Intent().apply {
-                putExtra("latitude", point.latitude)
-                putExtra("longitude", point.longitude)
+                putExtra("latitude", selectedLatLng.latitude)
+                putExtra("longitude", selectedLatLng.longitude)
             }
-
             setResult(Activity.RESULT_OK, resultIntent)
             finish()
         }
     }
 
-    private fun setSelectedPoint(point: GeoPoint) {
-        selectedPoint = point
+    override fun onMapReady(googleMap: GoogleMap) {
+        mMap = googleMap
+        Timber.d("Google Map is ready")
 
-        if (marker == null) {
-            marker = Marker(map).apply {
-                setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
-            }
-            map.overlays.add(marker)
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(selectedLatLng, 15f))
+        updateSelectedMarker(selectedLatLng)
+
+        mMap.setOnMapClickListener { latLng ->
+            updateSelectedMarker(latLng)
         }
 
-        marker?.position = point
-        marker?.title = "Selected location"
-        map.invalidate()
+        showExistingMarkers()
     }
 
-    override fun onResume() {
-        super.onResume()
-        map.onResume()
-    }
-
-    override fun onPause() {
-        map.onPause()
-        super.onPause()
+    private fun updateSelectedMarker(latLng: LatLng) {
+        selectedLatLng = latLng
+        selectedMarker?.remove()
+        selectedMarker = mMap.addMarker(
+            MarkerOptions()
+                .position(latLng)
+                .title("Selected Location")
+        )
+        mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng))
     }
 
     private fun showExistingMarkers() {
         val events = EventData.eventsStore.findAll()
-
         events.forEach { event ->
-            val point = GeoPoint(53.3498 + (event.id * 0.001), -6.2603 + (event.id * 0.001))
-
-            val m = Marker(map).apply {
-                position = point
-                title = event.title
-                snippet = event.description
-                setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
-            }
-
-            map.overlays.add(m)
+            val point = LatLng(53.3498 + (event.id * 0.001), -6.2603 + (event.id * 0.001))
+            mMap.addMarker(
+                MarkerOptions()
+                    .position(point)
+                    .title(event.title)
+                    .snippet(event.description)
+            )
         }
-
-        map.invalidate()
     }
 }
