@@ -1,8 +1,20 @@
 
+import java.util.Properties
+import java.io.FileInputStream
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.secrets.gradle.plugin)
 }
+
+val localProperties = Properties().apply {
+    val file = rootProject.file("local.properties")
+    if (file.exists()) {
+        load(FileInputStream(file))
+    }
+}
+val placesApiKey = localProperties.getProperty("PLACES_API_KEY", "DEFAULT_API_KEY")
+
 android {
     namespace = "com.example.assgn1_app"
     compileSdk {
@@ -22,7 +34,7 @@ android {
         versionName = "2.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        manifestPlaceholders["PLACES_API_KEY"] = "DEFAULT_API_KEY"
+        manifestPlaceholders["PLACES_API_KEY"] = placesApiKey
     }
 
     buildTypes {
@@ -58,6 +70,7 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     implementation(libs.google.maps)
     implementation(libs.google.place)
+    implementation("com.google.android.gms:play-services-maps:18.2.0")
     testImplementation("org.robolectric:robolectric:4.14.1")
     implementation("com.jakewharton.timber:timber:5.0.1")
 
