@@ -14,37 +14,38 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (Timber.treeCount == 0) {
-            Timber.plant(Timber.DebugTree())
-        }
-        Timber.i("MainActivity initialized & Timber DebugTree planted")
 
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.signin_or_login)
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.developerSignInButton)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        val viewMarksButton = findViewById<Button>(R.id.viewMarksButton)
-        val addMarkButton = findViewById<Button>(R.id.addMarkButton)
-        val viewEventsButton = findViewById<Button>(R.id.viewEventsButton)
+        //buttons
+        val signUpButton = findViewById<Button>(R.id.signUpButton)
+        val loginButton = findViewById<Button>(R.id.loginButton)
+        val developerSignInButton = findViewById<Button>(R.id.developerSignInButton)
 
-        viewMarksButton.setOnClickListener {
-            Timber.d("Navigating to MarkListActivity")
-            startActivity(Intent(this, MarkListActivity::class.java))
+        signUpButton.setOnClickListener {
+            Timber.d("Navigating to Sign Up")
+            startActivity(
+                Intent(this, SignInActivity::class.java)
+            )
         }
 
-        addMarkButton.setOnClickListener {
-            Timber.d("Navigating to AddEditActivity")
-            startActivity(Intent(this, AddEditActivity::class.java))
+        loginButton.setOnClickListener {
+            Timber.d("Navigating to Login")
+            startActivity(
+                Intent(this, LoginActivity::class.java)
+            )
         }
 
-        viewEventsButton.setOnClickListener {
-            Timber.d("Navigating to EventListActivity")
-            startActivity(Intent(this, EventListActivity::class.java))
+        developerSignInButton.setOnClickListener {
+            Timber.d("Developer sign in clicked")
+            //need more
         }
     }
 }

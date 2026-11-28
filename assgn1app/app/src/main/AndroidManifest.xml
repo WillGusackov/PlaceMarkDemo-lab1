@@ -54,6 +54,14 @@
             android:name=".main.EventDetailActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".main.SignInActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".main.LoginActivity"
+            android:exported="false" />
+
 
     </application>
 
