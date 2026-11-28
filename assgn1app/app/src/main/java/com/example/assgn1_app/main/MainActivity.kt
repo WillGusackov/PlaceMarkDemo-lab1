@@ -13,7 +13,7 @@ import timber.log.Timber
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+    // i need to add logic : if user has already signup and logged in, keep the data on there phone and they will see another page when clicking the app
 
         enableEdgeToEdge()
         setContentView(R.layout.signin_or_login)
