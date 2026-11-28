@@ -53,4 +53,26 @@
     <string name="back">Back</string>
     <string name="select_location">Select Location on Map</string>
     <string name="use_this_location">Use This Location</string>
+    <string name="login_welcome">Welcome Back</string>
+    <string name="login_subtitle">Please sign in to continue</string>
+    <string name="hint_username">Username or Email</string>
+    <string name="hint_password">Password</string>
+    <string name="btn_login">Login</string>
+    <string name="btn_register">Don\'t have an account? Register</string>
+    <string name="btn_developer_sign_in">Developer Sign In</string>
+    <string name="btn_sign_up">Sign Up / Register</string>
+    <string name="btn_existing_login">Login with Existing Account</string>
+    <string name="signin_or_login_title">Welcome</string>
+    <string name="signin_or_login_subtitle">Choose how you would like to proceed</string>
+    <string name="signup_title">Create Account</string>
+    <string name="signup_subtitle">Sign up to get started</string>
+    <string name="hint_name">Full Name</string>
+    <string name="hint_email">Email Address</string>
+    <string name="btn_create_account">Create Account</string>
+    <string name="btn_already_have_account">Already have an account? Login</string>
+    <string name="email_verification_title">Verify Your Email</string>
+    <string name="email_verification_subtitle">Enter the verification code sent to your email address.</string>
+    <string name="hint_verification_code">Enter 6-Digit Code</string>
+    <string name="btn_verify">Verify Code</string>
+    <string name="btn_resend_code">Resend Code</string>
 </resources>

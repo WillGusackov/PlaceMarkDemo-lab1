@@ -47,6 +47,10 @@
             android:exported="false" />
 
         <activity
+            android:name=".userPreferences.emailConfirmation"
+            android:exported="false" />
+
+        <activity
             android:name=".main.EventDetailActivity"
             android:exported="false" />
 

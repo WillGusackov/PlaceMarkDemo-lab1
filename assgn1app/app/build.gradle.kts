@@ -5,6 +5,7 @@ import java.io.FileInputStream
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.secrets.gradle.plugin)
+    id("org.jetbrains.kotlin.plugin.compose")
 }
 
 val localProperties = Properties().apply {
@@ -51,6 +52,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        compose = true
     }
 }
 
@@ -76,4 +78,15 @@ dependencies {
     implementation("com.jakewharton.timber:timber:5.0.1")
 
 
+    // Jetpack Compose & Architecture & Credential Manager
+    implementation(platform("androidx.compose:compose-bom:2024.02.00"))
+    implementation("androidx.compose.ui:ui")
+    implementation("androidx.compose.ui:ui-graphics")
+    implementation("androidx.compose.ui:ui-tooling-preview")
+    implementation("androidx.compose.material3:material3")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.7.0")
+    implementation("androidx.navigation:navigation-compose:2.7.7")
+    implementation("androidx.credentials:credentials:1.3.0")
+    implementation("androidx.credentials:credentials-play-services-auth:1.3.0")
 }

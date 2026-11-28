@@ -1,6 +1,293 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_main_events"
+    android:padding="24dp">
+
+    <!-- Secret / Hidden Developer Sign In Button at Top Left -->
+    <Button
+        android:id="@+id/developerSignInButton"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha="0.8"
+        android:fontFamily="monospace"
+        android:text="@string/btn_developer_sign_in"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Center Content Group (Title, Subtitle, Sign Up, Login) -->
+    <LinearLayout
+        android:layout_width="335dp"
+        android:layout_height="780dp"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Title with Solid White Outline -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            tools:ignore="OverlappingText">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:gravity="center"
+                android:importantForAccessibility="no"
+                android:text="@string/signin_or_login_title"
+                android:textColor="@android:color/white"
+                android:textSize="36sp"
+                android:textStyle="bold"
+                android:translationX="-3dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:gravity="center"
+                android:importantForAccessibility="no"
+                android:text="@string/signin_or_login_title"
+                android:textColor="@android:color/white"
+                android:textSize="36sp"
+                android:textStyle="bold"
+                android:translationX="3dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:gravity="center"
+                android:importantForAccessibility="no"
+                android:text="@string/signin_or_login_title"
+                android:textColor="@android:color/white"
+                android:textSize="36sp"
+                android:textStyle="bold"
+                android:translationY="-3dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:gravity="center"
+                android:importantForAccessibility="no"
+                android:text="@string/signin_or_login_title"
+                android:textColor="@android:color/white"
+                android:textSize="36sp"
+                android:textStyle="bold"
+                android:translationY="3dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:gravity="center"
+                android:importantForAccessibility="no"
+                android:text="@string/signin_or_login_title"
+                android:textColor="@android:color/white"
+                android:textSize="36sp"
+                android:textStyle="bold"
+                android:translationX="-2.2dp"
+                android:translationY="-2.2dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:gravity="center"
+                android:importantForAccessibility="no"
+                android:text="@string/signin_or_login_title"
+                android:textColor="@android:color/white"
+                android:textSize="36sp"
+                android:textStyle="bold"
+                android:translationX="2.2dp"
+                android:translationY="-2.2dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:gravity="center"
+                android:importantForAccessibility="no"
+                android:text="@string/signin_or_login_title"
+                android:textColor="@android:color/white"
+                android:textSize="36sp"
+                android:textStyle="bold"
+                android:translationX="-2.2dp"
+                android:translationY="2.2dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:gravity="center"
+                android:importantForAccessibility="no"
+                android:text="@string/signin_or_login_title"
+                android:textColor="@android:color/white"
+                android:textSize="36sp"
+                android:textStyle="bold"
+                android:translationX="2.2dp"
+                android:translationY="2.2dp" />
+
+            <TextView
+                android:id="@+id/titleText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:gravity="center"
+                android:text="@string/signin_or_login_title"
+                android:textColor="#070606"
+                android:textSize="42sp"
+                android:textStyle="bold" />
+        </FrameLayout>
+
+        <!-- Subtitle with Solid White Outline -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            tools:ignore="OverlappingText">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:gravity="center"
+                android:importantForAccessibility="no"
+                android:text="@string/signin_or_login_subtitle"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:translationX="-2.5dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:gravity="center"
+                android:importantForAccessibility="no"
+                android:text="@string/signin_or_login_subtitle"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:translationX="2.5dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:gravity="center"
+                android:importantForAccessibility="no"
+                android:text="@string/signin_or_login_subtitle"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:translationY="-2.5dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:gravity="center"
+                android:importantForAccessibility="no"
+                android:text="@string/signin_or_login_subtitle"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:translationY="2.5dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:gravity="center"
+                android:importantForAccessibility="no"
+                android:text="@string/signin_or_login_subtitle"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:translationX="-1.8dp"
+                android:translationY="-1.8dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:gravity="center"
+                android:importantForAccessibility="no"
+                android:text="@string/signin_or_login_subtitle"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:translationX="1.8dp"
+                android:translationY="-1.8dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:gravity="center"
+                android:importantForAccessibility="no"
+                android:text="@string/signin_or_login_subtitle"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:translationX="-1.8dp"
+                android:translationY="1.8dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:gravity="center"
+                android:importantForAccessibility="no"
+                android:text="@string/signin_or_login_subtitle"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:translationX="1.8dp"
+                android:translationY="1.8dp" />
+
+            <TextView
+                android:id="@+id/subtitleText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:text="@string/signin_or_login_subtitle"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+        </FrameLayout>
+
+        <Button
+            android:id="@+id/signUpButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="monospace"
+            android:minHeight="48dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:backgroundTint="@color/quantum_vanillablueA700"
+            android:text="@string/btn_sign_up" />
+
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:minHeight="48dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:backgroundTint="@color/quantum_googgreen"
+            android:text="@string/btn_existing_login" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
