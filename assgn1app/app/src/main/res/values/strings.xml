@@ -66,7 +66,7 @@
     <string name="signin_or_login_subtitle">Choose how you would like to proceed</string>
     <string name="signup_title">Create Account</string>
     <string name="signup_subtitle">Sign up to get started</string>
-    <string name="hint_name">Full Name</string>
+    <string name="hint_name">Create a username</string>
     <string name="hint_email">Email Address</string>
     <string name="btn_create_account">Create Account</string>
     <string name="btn_already_have_account">Already have an account? Login</string>
